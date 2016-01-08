@@ -19,11 +19,11 @@ while True:
 
     if bgp_index[0]=='PREFIX':
         prefix = bgp_index[1]
-        prefix.strip('\n')
-    
-    if bgp_index[0]=='NEXT_HOP':
+    elif bgp_index[0]=='NEXT_HOP':
         next_hop = bgp_index[1].replace('\n', '')
-        
+    else:
+        continue
+            
     if next_hop in nextHop_to_prefixCount:
         nextHop_to_prefixCount[next_hop] = nextHop_to_prefixCount[next_hop] + 1
     else:
@@ -31,4 +31,9 @@ while True:
 
 #print entries
 for entry in nextHop_to_prefixCount:
-    print entry + ": " + str(nextHop_to_prefixCount[entry])
+    if entry == '':
+        print "Total entries: " + str(nextHop_to_prefixCount[entry])
+    else:
+        print entry + ": " + str(nextHop_to_prefixCount[entry])
+
+
